@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  name     String  @db.VarChar(255)
+  email    String  @unique @db.VarChar(255)
+  password String  @db.VarChar(512)
+
+  followers Follows[] @relation("Follower")
+  following Follows[] @relation("Following")
+
+  tweets      Tweet[] @relation("TweetedByUser")
+  likedTweets Tweet[] @relation("LikedByUser")
+}
+
+model Follows {
+  follower    User @relation("Follower", fields: [followerId], references: [id])
+  followerId  Int
+  following   User @relation("Following", fields: [followingId], references: [id])
+  followingId Int
+
+  @@id([followerId, followingId])
+}
+
+model Tweet {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+
+  author   User @relation("TweetedByUser", fields: [authorId], references: [id])
+  authorId Int
+
+  likedBy User[] @relation("LikedByUser", references: [id])
+
+  parentTweet   Tweet?  @relation("NestedTweet", fields: [parentTweetId], references: [id])
+  parentTweetId Int?
+  childTweet    Tweet[] @relation("NestedTweet")
+}

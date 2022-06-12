@@ -1,0 +1,14 @@
+.input-field {
+	@apply text-sm px-3 py-2 border border-primary-400 hover:border-primary-900 focus:outline-none focus:ring-1 focus:border-primary-800 focus:ring-primary-800 rounded;
+	&.error {
+		@apply border-error focus:border-error focus:ring-error ;
+	}
+}
+
+.link {
+    @apply text-secondary;
+}
+
+.logo{
+	font-family: 'Fredoka One', cursive;
+}

@@ -1,0 +1,7 @@
+@mixin res-height($height) {
+  height: calc(100vh - $height);
+}
+
+@mixin res-width($width) {
+  width: calc(100vw - $width);
+}
