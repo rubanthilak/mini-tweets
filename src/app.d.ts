@@ -20,7 +20,9 @@ declare namespace App {
 		Tweet : Tweet
 	}
 	// interface Platform {}
-	// interface Session {}
+	interface Session {
+		user : User | string | JwtPayload | null,
+	}
 	// interface Stuff {}
 	
 }
