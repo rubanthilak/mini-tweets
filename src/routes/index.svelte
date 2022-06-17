@@ -3,7 +3,6 @@
   export async function load({ params, fetch, session, stuff }) {
     const response = await fetch('/api/tweet');
     const { tweets } = await response.json();
-
     return {
       status: response.status,
       props: {
@@ -18,15 +17,12 @@
   import { Card } from '$components/card';
   import { fly } from "svelte/transition";
 
-  /** @type {Array<any>} */
+  /** @type { Array<Tweet> } */
   export let tweets;
-  
+  /** @type { Tweet | null} */
+  let justTweeted = null;
+  /** @type { string | null }*/
   let content = '';
-
-  /**
-  * @type {{ content: any; likedBy: string | any[]; } | null}
-  */
-  let newTweet = null;
 
   async function triggerPost() {
     const response = await fetch('/api/tweet', {
@@ -39,7 +35,7 @@
     if(response.ok){
       const { tweet } = await response.json(); 
       content = '';
-      newTweet = tweet;
+      justTweeted = tweet;
     }
   }
 </script>
@@ -47,12 +43,13 @@
 <section class="home-section w-96 xl:w-1/3 mx-auto">
   <textarea class="input-field h-40 w-full resize-none" placeholder="What's on your mind ?" type="text" bind:value={content} />
   <Button size={'small'} on:click={triggerPost}>Tweet</Button>
-  {#if newTweet}
+  {#if justTweeted}
     <div transition:fly={{y:-10,duration:500}}>
       <Card class="my-4 cursor-pointer">
-        <p>{newTweet.content}</p>
+        <p class="text-sm font-bold mb-4 underline">{justTweeted.author.name}</p>
+        <p>{justTweeted.content}</p>
         <div class="flex gap-2 mt-2">
-          <p class="text-xs">{newTweet.likedBy.length}</p>
+          <p class="text-xs">{justTweeted.likedBy.length}</p>
           <p class="text-xs cursor-pointer hover:text-accent">Like</p>
           <p class="text-xs cursor-pointer hover:text-accent">Reply</p>
         </div>
@@ -61,6 +58,7 @@
   {/if}
   {#each tweets as tweet}
     <Card class="my-4 cursor-pointer">
+      <a href={`/user/${tweet.author.id}`} class="text-sm font-bold mb-4 underline hover:text-accent">{tweet.author.name}</a>
       <p>{tweet.content}</p>
       <div class="flex gap-2 mt-2">
         <p class="text-xs">{tweet.likedBy.length}</p>

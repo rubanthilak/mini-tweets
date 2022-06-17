@@ -15,7 +15,9 @@ const config = {
     },
     vite: {
       envPrefix: 'ENV_',
-      
+      server : {
+        port : 6900
+      }
     }
 	},
 	preprocess: [

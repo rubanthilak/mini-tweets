@@ -9,14 +9,19 @@ export async function get({ request }) {
 
   const tweets = await db.tweet.findMany({
     include: {
-      likedBy: true
+      likedBy: true,
+      author: {
+        select: {
+          name: true,
+          id: true
+        }
+      }
     }
   })
 
   return {
     status: 200,
     body: {
-        message: 'Tweet posted successfully',
         tweets
     },
   };
@@ -44,7 +49,13 @@ export async function post({ request, locals }) {
       author: { connect: { id: userId } },
     },
     include: {
-      likedBy: true
+      likedBy: true,
+      author: {
+        select: {
+          name: true,
+          id: true
+        }
+      }
     }
   })
 

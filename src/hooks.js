@@ -4,7 +4,8 @@ import { getUserFromJwtToken } from '$utils/account'
 export async function handle({ event, resolve }) {
 
   if (!event.url.pathname.startsWith('/login') && !event.url.pathname.startsWith('/signup')) {
-    event.locals.user = getUserFromJwtToken(event.request.headers.get('cookie'));
+    const cookie = event.request.headers.get('cookie');
+    event.locals.user = getUserFromJwtToken(cookie);
   }
 
   const response = await resolve(event, {
@@ -13,7 +14,9 @@ export async function handle({ event, resolve }) {
   return response;
 }
 
-/** @type {import('@sveltejs/kit').GetSession} */
+/**
+ * @param {{ locals: { user: { id: any; name: any; email: any; }; }; }} event
+ */
 export function getSession(event) {
   return event.locals.user
     ? {
