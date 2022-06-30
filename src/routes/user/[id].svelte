@@ -48,6 +48,10 @@
 	}
 </script>
 
+<head>
+	<title>{user ? user.name : 'Loading..'}</title>
+</head>
+
 {#if user}
 	<h1>{user.name}</h1>
 	<p>{user.email}</p>

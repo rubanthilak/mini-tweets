@@ -40,6 +40,10 @@
 
 </script>
 
+<head>
+  <title>Tweets</title>
+</head>
+
 <section class="home-section w-96 xl:w-1/3 mx-auto">
   <textarea class="input-field h-40 w-full resize-none" placeholder="What's on your mind ?" type="text" bind:value={content} />
   <Button size={'small'} on:click={triggerPost}>Tweet</Button>
@@ -57,7 +61,7 @@
     </div>
   {/if}
   {#each tweets as tweet}
-    <TweetCard tweet={tweet} />
+    <TweetCard {tweet} />
   {/each}
 </section>
   
