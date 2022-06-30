@@ -5,12 +5,14 @@ interface User {
 }
 
 interface Tweet {
+	id: number,
 	content: string | null,
 	likedBy: string | any[]; 
 	author: { 
 		id: string
 		name: string
-	} 
+	} ,
+	_count:any
 }
 
 /// <reference types="@sveltejs/kit" />

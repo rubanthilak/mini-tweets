@@ -28,7 +28,7 @@
 	);
 
 	async function triggerFollow() {
-		const response = await fetch(`/api/user/follow/${user.id}`, {
+		const response = await fetch(`/api/user/${user.id}/follow`, {
 			method: 'POST'
 		});
 		if (response.ok) {
@@ -38,7 +38,7 @@
 	}
 
 	async function triggerUnfollow() {
-		const response = await fetch(`/api/user/follow/${user.id}`, {
+		const response = await fetch(`/api/user/${user.id}/follow`, {
 			method: 'DELETE'
 		});
 		if (response.ok) {

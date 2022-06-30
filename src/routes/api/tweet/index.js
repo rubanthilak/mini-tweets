@@ -1,15 +1,13 @@
 import db from '$utils/database';
-import cookie from 'cookie-esm';
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get({ request }) {
 
   const tweets = await db.tweet.findMany({
     include: {
-      likedBy: true,
+      _count:{
+        select: { likedBy: true },
+      },
       author: {
         select: {
           name: true,
