@@ -1,10 +1,12 @@
 import adapter from '@sveltejs/adapter-node';
 import preprocess from "svelte-preprocess";
-import dotenv from 'dotenv';
-dotenv.config();
+import { config } from 'dotenv';
+
+//Loads .env file contents into process.env.
+config();
 
 /** @type {import('@sveltejs/kit').Config} */
-const config = {
+export default {
 	kit: {
     adapter: adapter(),
     alias: {
@@ -26,5 +28,3 @@ const config = {
     }),
   ]
 };
-
-export default config;

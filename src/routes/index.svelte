@@ -13,8 +13,7 @@
 </script>
 
 <script>
-  import { Button } from '$components/button';
-  import { Card } from '$components/card';
+  import { Button, Card } from '$components';
   import { fly } from "svelte/transition";
 
   /** @type { Array<Tweet> } */

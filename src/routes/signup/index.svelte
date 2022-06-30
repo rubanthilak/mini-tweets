@@ -44,6 +44,5 @@
     <input class="input-field" type="password" placeholder="Confirm Password" bind:value={repeatPassword}>
     <Button type="submit" isSpan>Signup</Button>
     <p class="text-xs">Existing user ? <span><a class="text-xs link" href="/login">Click here</a></span> to login.</p>
-    
   </form>
 </section>

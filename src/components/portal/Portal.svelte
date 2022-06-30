@@ -53,7 +53,7 @@
 <script>
   /**
    * DOM Element or CSS Selector
-   * @type { HTMLElement|string}
+   * @type {HTMLElement|string}
    */
   export let target = "body";
 </script>

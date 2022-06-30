@@ -1,7 +1,4 @@
 import db from '$utils/database';
-import cookie from 'cookie-esm';
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function post({ params, request, locals }) {
